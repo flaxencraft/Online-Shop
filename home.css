@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+}
+.navbar-container {
+    display: flex;
+    justify-content: center;
+    background-color: #c0c0c0;
+    position: fixed
+}
+.best-seller-product {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    padding: 200px;
+}
+.product-container {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    text-decoration: none;
+}
+.product-container img {
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.product-container:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    scale: 105%;
+}
+.product-container img:hover {
+    scale: 120%;
+    transition: 0.3s;
+}
+.product-button {
+    text-decoration: none;
+    color: black;
+}

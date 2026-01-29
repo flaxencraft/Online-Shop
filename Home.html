@@ -1,15 +1,49 @@
 <html>
     <head>
         <title>Home Page</title>
+        <link rel="stylesheet" href="./home.css">
     </head>
-    <body>
-        <div>
-            <h2>Best Seller</h2>
-            <div>
-                <img src="./cilok.jpg" alt="cilok image" width="25%">
-                <h3>Cilok</h3>
-                <p>Cilok</p>
+    <body style="font-family: 'Poppins';">
+        <div class="navbar-container">
+            <div class="logo">
+                <ul>
+                    <li>
+                        <h2>My Style</h2>
+                    </li>
+                </ul>
+            </div>
+            <div class="search">
+                <ul>
+                    <li>
+                        <input type="text">
+                    </li>
+                </ul>
             </div>
         </div>
+        <div class="best-seller-container">
+            <h2>Best Seller</h2>
+            <div class="best-seller-product">
+                <div class="product-container">
+                    <img src="./cireng.jpg" alt="cireng image" width="25%">
+                    <h3>Cireng</h3>
+                    <p>Rp.500</p>
+                </div>
+                <a class="product-button" href="./cilok.html">
+                    <div class="product-container">
+                        <img src="./cilok.jpg" alt="cilok image" width="25%">
+                        <h3>Cilok</h3>
+                        <p>Rp.500</p>
+                </div>
+                </a>
+                <a class="product-button">
+                    <div class="product-container">
+                        <img src="./ayam_geprek.jpg" alt="ayam geprek" width="25%">
+                        <h3>Ayam Geprek</h3>
+                        <p>Rp10.000</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <script src="./home.js"></script>
     </body>
 </html>
