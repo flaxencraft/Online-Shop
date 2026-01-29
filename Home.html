@@ -5,16 +5,16 @@
     </head>
     <body style="font-family: 'Poppins';">
         <div class="navbar-container">
-            <div class="logo">
-                <ul>
-                    <li>
+            <div class="logo-container">
+                <ul class="logo-ul">
+                    <li class="logo-li">
                         <h2>My Style</h2>
                     </li>
                 </ul>
             </div>
             <div class="search">
-                <ul>
-                    <li>
+                <ul class="search-ul">
+                    <li class="search-li">
                         <input type="text">
                     </li>
                 </ul>
@@ -22,26 +22,11 @@
         </div>
         <div class="best-seller-container">
             <h2>Best Seller</h2>
+            <p id="totalItemPrice">Total (0 barang): Rp0:</p>
+            <button class="show-button" id="showButton">Tampilkan</button>
+            <div class="cart-list-container" id="cartListContainer">
+            </div>
             <div class="best-seller-product">
-                <div class="product-container">
-                    <img src="./cireng.jpg" alt="cireng image" width="25%">
-                    <h3>Cireng</h3>
-                    <p>Rp.500</p>
-                </div>
-                <a class="product-button" href="./cilok.html">
-                    <div class="product-container">
-                        <img src="./cilok.jpg" alt="cilok image" width="25%">
-                        <h3>Cilok</h3>
-                        <p>Rp.500</p>
-                </div>
-                </a>
-                <a class="product-button">
-                    <div class="product-container">
-                        <img src="./ayam_geprek.jpg" alt="ayam geprek" width="25%">
-                        <h3>Ayam Geprek</h3>
-                        <p>Rp10.000</p>
-                    </div>
-                </a>
             </div>
         </div>
         <script src="./home.js"></script>
