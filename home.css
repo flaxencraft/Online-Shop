@@ -1,67 +1,213 @@
-body {
+/* 1. RESET & FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
+
+body {
+    background-color: #f0f2f5; /* Background halaman sedikit abu-abu agar kartu putih terlihat menonjol */
+    color: #333;
+}
+
+/* 2. NAVBAR (Semi-Transparan + Blur) */
 .navbar-container {
     display: flex;
-    justify-content: center;
-    background-color: #c0c0c0;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Warna Biru Gelap dengan Transparansi 80% */
+    background-color: rgba(44, 62, 80, 0.85); 
+    
+    /* Efek Blur Glassmorphism */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    padding: 0 5%;
     width: 100%;
+    height: 70px;
     position: fixed;
     top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.logo-li {
-    list-style-type: none;
+
+.logo-ul, .search-ul {
+    list-style: none;
 }
-.search-li {
-    list-style-type: none ;
+
+.logo-li h2 {
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+
+#search {
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: none;
+    width: 250px;
+    outline: none;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+#search:focus {
+    width: 320px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+}
+
+/* 3. CONTAINER UTAMA */
 .best-seller-container {
-    margin-top: 2rem;
-    padding: 2rem;
+    margin-top: 100px; /* Jarak agar tidak tertutup navbar yang melayang */
+    padding: 2rem 5%;
 }
+
+.best-seller-container h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+#totalItemPrice {
+    background: #ecf0f1;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* 4. TOMBOL TAMPILKAN (Bentuk Pill) */
+.show-button {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    margin-bottom: 25px;
+}
+
+.show-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* 5. KERANJANG BELANJA */
+.cart-list-container {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 0 25px; /* Padding atas bawah kita nol-kan dulu */
+    margin-bottom: 0;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    border-left: 6px solid #3498db;
+    
+    /* ANIMASI UTAMA */
+    overflow: hidden;         /* Sembunyikan konten yang keluar batas */
+    max-height: 0;            /* Tinggi awal nol */
+    opacity: 0;               /* Tidak terlihat */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Transisi halus */
+    pointer-events: none;     /* Agar tidak bisa diklik saat sembunyi */
+}
+
+/* Class tambahan yang akan kita panggil via JavaScript */
+.cart-list-container.active {
+    max-height: 1000px;       /* Beri angka besar agar muat banyak barang */
+    opacity: 1;               /* Terlihat penuh */
+    padding: 25px;            /* Kembalikan padding */
+    margin-bottom: 40px;      /* Kembalikan margin */
+    pointer-events: auto;     /* Bisa diklik lagi */
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.cart-item button {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cart-item button:hover {
+    background-color: #ff6b81;
+}
+
+/* 6. GRID PRODUK */
 .best-seller-product {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 30px;
 }
-.show-button {
-    text-decoration: none;
-    color: black;
-    border: 0.1rem solid black;
-    padding: 0.25rem;
-    border-radius: 10rem;
-    transition: 0.3s;
-}
+
 .product-container {
-    border: 0.1rem solid #eee;
-    padding: 15px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: 0.3s;
-    display: flex;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
     text-decoration: none;
-    justify-content: space-between;
-    min-height: 200px;
+    color: #333;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
 }
+
+.product-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
 .product-container img {
-    border-radius: 6px;
-    transition: 0.3s;
-    width: 75%;
+    width: 100%;
     height: 200px;
     object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
 }
-.product-container img:hover {
-    scale: 120%;
+
+.product-container h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.product-container p {
+    color: #2ecc71;
+    font-weight: 600;
+    font-size: 17px;
+}
+.checkout-button {
+    background-color: #2ecc71; /* Warna hijau sukses */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 15px;
+    cursor: pointer;
     transition: 0.3s;
-    box-shadow: 0 8px 16px rgba(0, 255, 255, 0.3);
 }
-.product-container:hover {
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    scale: 105%;
-}
-.product-button {
-    text-decoration: none;
-    color: black;
+
+.checkout-button:hover {
+    background-color: #27ae60;
+    transform: scale(1.02);
 }
