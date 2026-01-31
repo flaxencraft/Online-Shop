@@ -12,10 +12,21 @@ const showButton = document.getElementById("showButton");
 
 let isCartVisible = false;
 
+// Fungsi pusat untuk menghitung harga akhir
+function getFinalPrice(originalPrice, discountPercentage = 0, couponCode = "") {
+    let discountAmount = 0;
+    if (couponCode === "GG26") {
+        discountAmount = originalPrice * (5 / 100);
+    } else {
+        discountAmount = originalPrice * (discountPercentage / 100);
+    }
+    return originalPrice - discountAmount;
+}
+
 // 1. Definisikan fungsi untuk mengambil data
 async function loadProducts() {
     try {
-        const response = await fetch('produk.json');
+        const response = await fetch('./../../../data/produk.json');
         const products = await response.json();
         
         allProduct = products;
@@ -35,7 +46,7 @@ function displayProducts(dataProduk) {
         card.className = "product-container";
         card.href = "#";
         card.innerHTML = `
-            <img src="${barang.image}" alt="${barang.name}">
+            <img src="./../../../${barang.image}" alt="${barang.name}">
             <h3>${barang.name}</h3>
             <p>Rp ${barang.price.toLocaleString('id-ID')}</p>
         `;
@@ -71,10 +82,10 @@ function updateSummaryUI() {
     totalElement.style.color = isFreeOngkir ? "green" : "black";
     
     if (isFreeOngkir) {
-        totalElement.innerText = `Total (${totalProduct} items): Rp ${totalPrice.toLocaleString(`id-ID`)} - Gratis ongkir!`;
+        totalElement.innerText = `Total (${totalProduct} items): Rp ${totalPrice >= 20000 ? getFinalPrice(totalPrice, 10).toLocaleString(`id-ID`) : totalPrice.toLocaleString(`id-ID`)} - Gratis ongkir!`;
     } else {
         const gap = freeOngkirLimit - totalPrice;
-        totalElement.innerText = `Total (${totalProduct} items): Rp ${totalPrice.toLocaleString(`id-ID`)} (-Rp${gap} lagi untuk Gratis ongkir)`;
+        totalElement.innerText = `Total (${totalProduct} items): Rp $${totalPrice >= 20000 ? getFinalPrice(totalPrice, 10).toLocaleString(`id-ID`) : totalPrice.toLocaleString(`id-ID`)} (-Rp${gap} lagi untuk Gratis ongkir)`;
     }
 }
 
@@ -132,11 +143,49 @@ function renderCart() {
     });
 
     const grandTotal = document.createElement("h3");
-    const discount = document.createElement("span");
-    const finalPrice = totalPrice >= 20000 ? totalPrice - (totalPrice * 0.1) : totalPrice;
+    const couponContainer = document.createElement("div");
+    const couponInput = document.createElement("input");
+    const couponButton = document.createElement("button");
+    couponContainer.className = "coupon-container";
+    couponInput.className = "coupon-input";
+    couponInput.id = "couponInput";
+    couponButton.className = "coupon-button";
+    couponButton.id = "couponButton";
+    couponButton.innerText = "submit";
+    cartListElement.appendChild(couponContainer);
+    couponContainer.appendChild(couponInput);
+    couponContainer.appendChild(couponButton);
+    let finalPrice = totalPrice >= 20000 ? getFinalPrice(totalPrice, 10) : totalPrice;
+    let coupon = false;
+    couponButton.addEventListener("click", () => {
+        if ( coupon == true) return;
+        const couponInput = document.getElementById("couponInput");
+        const couponInputValue = couponInput.value;
+        if (couponInputValue === "GG26") {
+            finalPrice = getFinalPrice(finalPrice, 0, "GG26");
+            coupon = true;
+            const discount = document.getElementById("discount");
+            discount.innerText = totalPrice >= 20000 ? "Diskon 10% + 5%" : "Diskon 5%";
+            grandTotal.innerText = `Grand Total: Rp${finalPrice}`;
+            alert("Kode Berhasil Disubmit");
+        } else {
+            alert("Kode Coupon Yang Anda Masukkan Tidak Valid");
+        }
+    });
     if (totalPrice >= 20000) {
+        const discountContainer = document.createElement("div");
+        const discount = document.createElement("span");
+        const originalPrice = document.createElement("h3");
+        discountContainer.className = "discount-container";
+        discountContainer.id = "discountContainer";
+        originalPrice.innerText = `Grand Total: Rp${totalPrice.toLocaleString(`id-ID`)}`;
+        originalPrice.className = "original-price";
+        discount.id = "discount";
         discount.innerText = "Diskon 10%";
-        cartListElement.appendChild(discount);
+        discount.className = "discount-badge";
+        cartListElement.appendChild(discountContainer);
+        discountContainer.appendChild(originalPrice);
+        discountContainer.appendChild(discount);
     }
     grandTotal.innerText = `Grand Total: Rp${finalPrice.toLocaleString('id-ID')}`;
     cartListElement.appendChild(grandTotal);

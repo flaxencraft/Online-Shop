@@ -2,16 +2,16 @@
     {
         "name": "Cilok",
         "price": 500,
-        "image": "./cilok.jpg"
+        "image": "public/img/cilok.jpg"
     },
     {
         "name": "Cireng",
         "price": 2000,
-        "image": "./cireng.jpg"
+        "image": "public/img/cireng.jpg"
     },
     {
         "name": "Ayam Geprek",
-        "price": 500,
-        "image": "./ayam_geprek.jpg"
+        "price": 10000,
+        "image": "public/img/ayam_geprek.jpg"
     }
 ]
