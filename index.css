@@ -36,11 +36,7 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.logo-ul, .search-ul {
-    list-style: none;
-}
-
-.logo-li h2 {
+.navbar-container h2 {
     color: #ffffff;
     font-weight: 600;
     letter-spacing: 1.5px;
@@ -64,9 +60,13 @@ body {
     box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
 }
 
+#search::placeholder {
+    color: #7f8c8d;
+}
+
 /* 3. CONTAINER UTAMA */
 .best-seller-container {
-    margin-top: 100px; /* Jarak agar tidak tertutup navbar yang melayang */
+    margin-top: 100px;
     padding: 2rem 5%;
 }
 
@@ -379,4 +379,40 @@ body {
     .product-container h3 {
         font-size: 14px;
     }
+}
+
+/* Pastikan pembungkusnya relatif */
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-suggestion {
+    position: absolute;
+    top: 100%; /* Muncul tepat di bawah input */
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 2000;
+    overflow: hidden; /* Agar radius border memotong item di dalamnya */
+}
+
+.suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f2f5;
+    transition: background 0.2s;
+    color: #333;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background-color: #ecf0f1;
+    color: #3498db;
 }

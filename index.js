@@ -26,7 +26,7 @@ function getFinalPrice(originalPrice, discountPercentage = 0, couponCode = "") {
 // 1. Definisikan fungsi untuk mengambil data
 async function loadProducts() {
     try {
-        const response = await fetch('./../../../data/produk.json');
+        const response = await fetch('./data/produk.json');
         const products = await response.json();
         
         allProduct = products;
@@ -46,7 +46,7 @@ function displayProducts(dataProduk) {
         card.className = "product-container";
         card.href = "#";
         card.innerHTML = `
-            <img src="./../../../${barang.image}" alt="${barang.name}">
+            <img src="./assets/img/${barang.image}" alt="${barang.name}">
             <h3>${barang.name}</h3>
             <p>Rp ${barang.price.toLocaleString('id-ID')}</p>
         `;
@@ -85,7 +85,7 @@ function updateSummaryUI() {
         totalElement.innerText = `Total (${totalProduct} items): Rp ${totalPrice >= 20000 ? getFinalPrice(totalPrice, 10).toLocaleString(`id-ID`) : totalPrice.toLocaleString(`id-ID`)} - Gratis ongkir!`;
     } else {
         const gap = freeOngkirLimit - totalPrice;
-        totalElement.innerText = `Total (${totalProduct} items): Rp $${totalPrice >= 20000 ? getFinalPrice(totalPrice, 10).toLocaleString(`id-ID`) : totalPrice.toLocaleString(`id-ID`)} (-Rp${gap} lagi untuk Gratis ongkir)`;
+        totalElement.innerText = `Total (${totalProduct} items): Rp ${totalPrice >= 20000 ? getFinalPrice(totalPrice, 10).toLocaleString(`id-ID`) : totalPrice.toLocaleString(`id-ID`)} (-Rp${gap.toLocaleString("id-ID")} lagi untuk Gratis ongkir)`;
     }
 }
 
@@ -136,7 +136,7 @@ function renderCart() {
         const itemElement = document.createElement("div");
         itemElement.className = "cart-item";
         itemElement.innerHTML = `
-            <span>${item.product} (x${item.quantity}) - Rp${item.price * item.quantity}</span>
+            <span>${item.product} (x${item.quantity}) - Rp${(item.price * item.quantity).toLocaleString("id-ID")}</span>
             <button onclick="removeFromCart('${item.product}')">Hapus</button>
         `;
         cartListElement.appendChild(itemElement);
@@ -149,6 +149,7 @@ function renderCart() {
     couponContainer.className = "coupon-container";
     couponInput.className = "coupon-input";
     couponInput.id = "couponInput";
+    couponInput.autocomplete = "off";
     couponButton.className = "coupon-button";
     couponButton.id = "couponButton";
     couponButton.innerText = "submit";
@@ -238,6 +239,36 @@ searchInput.addEventListener("input", (e) => {
         displayProducts(filteredProducts);
     }
 });
+
+searchInput.addEventListener("input", (e) => {
+    const keyword = e.target.value.toLowerCase();
+    const filteredProducts = allProduct.filter(product => {
+        return product.name.toLowerCase().includes(keyword);
+    });
+    const searchContainer = document.querySelector(".search-container");
+    const productSuggestion = document.getElementById("searchSuggestion");
+
+    // Jika elemen yang diklik BUKAN bagian dari searchContainer
+    if (!searchContainer.contains(e.target)) {
+        productSuggestion.innerHTML = "";
+    }
+    if (filteredProducts.length === 0 || keyword === "") {
+        productSuggestion.innerHTML = ``;
+    } else {
+        productSuggestion.innerHTML = "";
+        filteredProducts.forEach(product => {
+            const suggestionItem = document.createElement("div");
+            suggestionItem.className = "suggestion-item";
+            suggestionItem.innerText = product.name;
+            suggestionItem.addEventListener("click", () => {
+                addToCart(product);
+                searchInput.value = "";
+                productSuggestion.innerHTML = "";
+            });
+            productSuggestion.appendChild(suggestionItem);
+        });
+    }
+})
 
 document.addEventListener("DOMContentLoaded", () => {
     // PENTING: Jalankan ini agar data muncul pertama kali saat web dibuka
