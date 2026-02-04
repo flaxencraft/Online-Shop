@@ -254,6 +254,8 @@ searchInput.addEventListener("input", (e) => {
     }
     if (filteredProducts.length === 0 || keyword === "") {
         productSuggestion.innerHTML = ``;
+        displayProducts(allProduct);
+        productSuggestion.innerHTML = "";
     } else {
         productSuggestion.innerHTML = "";
         filteredProducts.forEach(product => {
@@ -261,8 +263,10 @@ searchInput.addEventListener("input", (e) => {
             suggestionItem.className = "suggestion-item";
             suggestionItem.innerText = product.name;
             suggestionItem.addEventListener("click", () => {
+                searchInput.value = product.name;
+                const selectedProduct = allProduct.filter(p => p.name === product.name);
+                displayProducts(selectedProduct);
                 addToCart(product);
-                searchInput.value = "";
                 productSuggestion.innerHTML = "";
             });
             productSuggestion.appendChild(suggestionItem);
