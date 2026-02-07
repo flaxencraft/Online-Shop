@@ -1,0 +1,418 @@
+/* 1. RESET & FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f2f5; /* Background halaman sedikit abu-abu agar kartu putih terlihat menonjol */
+    color: #333;
+}
+
+/* 2. NAVBAR (Semi-Transparan + Blur) */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* Warna Biru Gelap dengan Transparansi 80% */
+    background-color: rgba(44, 62, 80, 0.85); 
+    
+    /* Efek Blur Glassmorphism */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    padding: 0 5%;
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-container h2 {
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#search {
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: none;
+    width: 250px;
+    outline: none;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+#search:focus {
+    width: 320px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.4);
+}
+
+#search::placeholder {
+    color: #7f8c8d;
+}
+
+/* 3. CONTAINER UTAMA */
+.best-seller-container {
+    margin-top: 100px;
+    padding: 2rem 5%;
+}
+
+.best-seller-container h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+#totalItemPrice {
+    background: #ecf0f1;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* 4. TOMBOL TAMPILKAN (Bentuk Pill) */
+.show-button {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    margin-bottom: 25px;
+}
+
+.show-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+/* 5. KERANJANG BELANJA */
+.cart-list-container {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 0 25px; /* Padding atas bawah kita nol-kan dulu */
+    margin-bottom: 0;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    border-left: 6px solid #3498db;
+    
+    /* ANIMASI UTAMA */
+    overflow: hidden;         /* Sembunyikan konten yang keluar batas */
+    max-height: 0;            /* Tinggi awal nol */
+    opacity: 0;               /* Tidak terlihat */
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Transisi halus */
+    pointer-events: none;     /* Agar tidak bisa diklik saat sembunyi */
+}
+
+/* Class tambahan yang akan kita panggil via JavaScript */
+.cart-list-container.active {
+    max-height: 1000px;       /* Beri angka besar agar muat banyak barang */
+    opacity: 1;               /* Terlihat penuh */
+    padding: 25px;            /* Kembalikan padding */
+    margin-bottom: 40px;      /* Kembalikan margin */
+    pointer-events: auto;     /* Bisa diklik lagi */
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.cart-item button {
+    background-color: #ff4757;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cart-item button:hover {
+    background-color: #ff6b81;
+}
+
+/* 6. GRID PRODUK */
+.best-seller-product {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+.product-container {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+}
+
+.product-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.product-container img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.product-container h3 {
+    font-size: 19px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.product-container p {
+    color: #2ecc71;
+    font-weight: 600;
+    font-size: 17px;
+}
+.checkout-button {
+    background-color: #2ecc71; /* Warna hijau sukses */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.checkout-button:hover {
+    background-color: #27ae60;
+    transform: scale(1.02);
+}
+.discount-container {
+    display: flex;
+}
+.discount-badge {
+    background-color: #ff4757;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #a4b0be;
+    margin-right: 5px;
+}
+.coupon-container {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.coupon-input {
+    flex: 1;
+    padding: 10px;
+    border: 2px dashed #3498db;
+    border-radius: 8px;
+    outline: none;
+}
+
+.coupon-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.coupon-button:hover {
+    background-color: #2980b9;
+}
+/* --- 7. RESPONSIVE DESIGN (Media Queries) --- */
+
+/* Tablet & HP Besar (Maksimal 768px) */
+@media screen and (max-width: 768px) {
+    .navbar-container {
+        padding: 0 3%;
+        height: auto;
+        flex-direction: column; /* Logo dan Search bertumpuk */
+        padding-bottom: 15px;
+    }
+
+    .logo-li h2 {
+        font-size: 20px;
+        margin: 10px 0;
+    }
+
+    #search {
+        width: 100%; /* Search bar memenuhi lebar layar */
+        max-width: 300px;
+    }
+
+    .best-seller-container {
+        margin-top: 140px; /* Jarak lebih besar karena navbar meninggi */
+    }
+
+    .best-seller-product {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Card lebih kecil */
+        gap: 15px;
+    }
+
+    .product-container {
+        padding: 15px;
+    }
+
+    .product-container h3 {
+        font-size: 16px;
+    }
+
+    .cart-list-container.active {
+        padding: 15px;
+    }
+}
+/* --- 7. RESPONSIVE DESIGN (Media Queries) --- */
+
+/* A. Layar Besar / Desktop (Default sudah bagus, tapi kita beri limit) */
+@media screen and (min-width: 1200px) {
+    .best-seller-container {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* B. Tablet & HP Layar Lebar (Maksimal 768px) */
+@media screen and (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column; /* Logo dan Search bertumpuk */
+        height: auto;
+        padding: 10px 5%;
+    }
+
+    #search {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 10px;
+    }
+
+    .best-seller-container {
+        margin-top: 130px; /* Menyesuaikan tinggi navbar yang bertambah */
+    }
+
+    .best-seller-product {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Card menyesuaikan layar */
+        gap: 20px;
+    }
+}
+
+/* C. HP Layar Kecil (Maksimal 480px) */
+@media screen and (max-width: 480px) {
+    .logo-li h2 {
+        font-size: 1.2rem;
+    }
+
+    #search {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+
+    .best-seller-container h2 {
+        font-size: 20px;
+    }
+
+    /* Penyesuaian Keranjang agar tidak sempit */
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .cart-item button {
+        width: 100%; /* Tombol hapus jadi penuh */
+        text-align: center;
+    }
+
+    .coupon-container {
+        flex-direction: column;
+    }
+
+    .coupon-button {
+        padding: 10px;
+    }
+
+    /* Card produk lebih kecil di HP */
+    .product-container {
+        padding: 10px;
+    }
+
+    .product-container img {
+        height: 140px;
+    }
+
+    .product-container h3 {
+        font-size: 14px;
+    }
+}
+
+/* Pastikan pembungkusnya relatif */
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-suggestion {
+    position: absolute;
+    top: 100%; /* Muncul tepat di bawah input */
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 2000;
+    overflow: hidden; /* Agar radius border memotong item di dalamnya */
+}
+
+.suggestion-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f2f5;
+    transition: background 0.2s;
+    color: #333;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background-color: #ecf0f1;
+    color: #3498db;
+}

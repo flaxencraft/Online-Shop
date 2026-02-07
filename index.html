@@ -1,50 +1,26 @@
 <html>
     <head>
         <title>Home Page</title>
-        <link rel="stylesheet" href="./home.css">
+        <link rel="stylesheet" href="./index.css">
+        <link rel="icon" href="./assets/logo/clothes.svg">
     </head>
-    <body style="font-family: 'Poppins';">
+    <body>
         <div class="navbar-container">
-            <div class="logo">
-                <ul>
-                    <li>
-                        <h2>My Style</h2>
-                    </li>
-                </ul>
-            </div>
-            <div class="search">
-                <ul>
-                    <li>
-                        <input type="text">
-                    </li>
-                </ul>
+            <h2>My Style</h2>
+            <div class="search-container" id="searchContainer">
+                <input class="search" id="search" type="text" autocomplete="off" placeholder="Cari Fashionmu!">
+                <div class="search-suggestion" id="searchSuggestion"></div>
             </div>
         </div>
         <div class="best-seller-container">
             <h2>Best Seller</h2>
+            <p id="totalItemPrice">Total (0 barang): Rp0:</p>
+            <button class="show-button" id="showButton">Tampilkan</button>
+            <div class="cart-list-container" id="cartListContainer">
+            </div>
             <div class="best-seller-product">
-                <div class="product-container">
-                    <img src="./cireng.jpg" alt="cireng image" width="25%">
-                    <h3>Cireng</h3>
-                    <p>Rp.500</p>
-                </div>
-                <a class="product-button" href="./cilok.html">
-                    <div class="product-container">
-                        <img src="./cilok.jpg" alt="cilok image" width="25%">
-                        <h3>Cilok</h3>
-                        <p>Rp.500</p>
-                </div>
-                </a>
-                <a class="product-button">
-                    <div class="product-container">
-                        <img src="./ayam_geprek.jpg" alt="ayam geprek" width="25%">
-                        <h3>Ayam Geprek</h3>
-                        <p>Rp10.000</p>
-                    </div>
-                </a>
             </div>
         </div>
-        <script src="./home.js"></script>
+        <script src="./index.js"></script>
     </body>
-
 </html>
