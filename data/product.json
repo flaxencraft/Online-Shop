@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Blue Shirt",
+        "price": 50000,
+        "image": "blue_shirt.png",
+        "description": "Bahan Sejuk, Nyaman, dan Tahan Lama"
+    },
+    {
+        "id": 2,
+        "name": "Orange Shirt",
+        "price": 50000,
+        "image": "orange_shirt.png",
+        "description": "Bahan Sejuk, Nyaman, dan Tahan Lama"
+    },
+    {
+        "id": 3,
+        "name": "Green Shirt",
+        "price": 50000,
+        "image": "green_shirt.png",
+        "description": "Bahan Sejuk, Nyaman, dan Tahan Lama"
+    },
+    {
+        "id": 4,
+        "name": "Pink Shirt",
+        "price": 50000,
+        "image": "pink_shirt.png",
+        "description": "Bahan Sejuk, Nyaman, dan Tahan Lama"
+    }
+]

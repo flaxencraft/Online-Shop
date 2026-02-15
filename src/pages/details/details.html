@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Product Pages</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./details.css">
+        <link rel="icon" href="/assets/logo/clothes.svg">
+    </head>
+    <body>
+        <!-- Navbar Container -->
+         <div class="navbar-container" id="navbarContainer">
+            <button class="back" id="back" type="button"></button>
+            <h1 id="nameTitle">Nama Produk</h1>
+         </div>
+        <!-- Product Container -->
+        <div class="product-container" id="productContainer">
+            <div class="img-container">
+                <img id="img" src="" alt="">
+            </div>
+            <h2 id="name">Nama Produk</h2>
+            <h3 id="price">Harga</h3>
+        </div>
+        <!-- Description Container -->
+        <div class="description-container" id="descriptionContainer">
+            <h2>Deskripsi</h2>
+            <span id="description">Deskripsi Produk</span>
+        </div>
+        <!-- Checkout Container -->
+        <div class="checkout-container" id="checkoutContainer">
+            <span>Tertarik dengan produk ini? Pre-Order sekarang dan ambil di toko kami!</span>
+            <div class="transaction" id="transaction">
+                <button type="button" class="cart" id="cart">Tambahkan ke Keranjang</button>
+                <button type="button" class="preorder" id="preorder">Pre-Order</button>
+            </div>
+        </div>
+        <!-- Review Comment -->
+        <div class="review-container" id="reviewContainer">
+            <h2>Review Produk</h2>
+            <button class="add-review" id="add-review">Tambah Review</button>
+            <span>Belum Ada Review Tentang Produk Ini. Jadilah Yang Pertama! Review anda berharga untuk kami</span>
+        </div>
+        <div class="review-option-container" id="reviewOptionContainer">
+            <button class="close" id="close"></button>
+            <h2>Rating</h2>
+            <div class="rating-input" id="ratingInput">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <div class="review" id="review">
+                <span>Kualitas:</span>
+                <input type="text" placeholder="Bagus dan Tahan Lama">
+                <span>kenyamanan:</span>
+                <input type="text" placeholder="Nyaman">
+                <span>Ulasan Lain:</span>
+                <input type="text" placeholder="Bajunya cantik dan cocok untuk sehari hari">
+            </div>
+            <span>Masukkan Video atau Foto Produk</span>
+            <span>*Tidak Wajib</span>
+            <input type="file" accept="image/*, video/*">
+            <button class="send-review" id="sendReview" type="button">Kirim Review</button>
+        </div>
+        <div class="overlay" id="overlay"></div>
+        <script src="./details.js"></script>
+    </body>
+</html>
