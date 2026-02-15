@@ -1,26 +1,58 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Home Page</title>
         <link rel="stylesheet" href="./index.css">
         <link rel="icon" href="./assets/logo/clothes.svg">
     </head>
     <body>
-        <div class="navbar-container">
-            <h2>My Style</h2>
-            <div class="search-container" id="searchContainer">
-                <input class="search" id="search" type="text" autocomplete="off" placeholder="Cari Fashionmu!">
-                <div class="search-suggestion" id="searchSuggestion"></div>
+        <div class="navbar-container" id="navabrContainer">
+            <h2>Rouluna Hijab</h2>
+            
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#" class="active">Beranda</a></li>
+                <li><a href="#">Produk</a></li>
+                <li><a href="#">Tentang Kami</a></li>
+                <li><a href="#">Media</a></li>
+            </ul>
+        </div>
+        <div class="overlay" id="overlay"></div>
+        <div class="profil" id="profil">
+            <h2>Selamat Datang di Rouluna Hijab</h2>
+            <span>Tempat dimana anda bisa menemukan koleksi hijab cantik dari bahan terjamin dengan harga yang terjangkau</span>
+        </div>
+        <div class="review-container" id="reviewContainer">
+            <h2>Review Produk</h2>
+            <button class="review-button" id="reviewButton">Tambah Review</button>
+            <div id="reviewsDisplay" class="reviews-display"></div>
+        </div>
+        <div class="review-window" id="reviewWindow">
+            <h3>Kode Produk</h3>
+            <input class="code-input" id="codeInput" type="text" placeholder="Masukkan Kode Produk" maxlength="8" autocomplete="off">
+            <span id="codeValid"></span>
+            <div class="review-input" id="reviewInput">
+                <h3>Bintang</h3>
+                <button class="star" id="star" value="1"></button>
+                <button class="star" id="star" value="2"></button>
+                <button class="star" id="star" value="3"></button>
+                <button class="star" id="star" value="4"></button>
+                <button class="star" id="star" value="5"></button>
+                <h3>Review</h3>
+                <input type="text" placeholder="Produk bagus, tahan lama, dan terjangkau">
+                <button type="submit">Kirim</button>
             </div>
         </div>
-        <div class="best-seller-container">
+        <div class="best-seller-container" id="bestSellerContainer">
             <h2>Best Seller</h2>
-            <p id="totalItemPrice">Total (0 barang): Rp0:</p>
-            <button class="show-button" id="showButton">Tampilkan</button>
-            <div class="cart-list-container" id="cartListContainer">
-            </div>
-            <div class="best-seller-product">
+            <div class="best-seller-product-container" id="bestSellerProductContainer">
             </div>
         </div>
-        <script src="./index.js"></script>
+        <script type="module" src="./indexs.js"></script>
     </body>
 </html>
